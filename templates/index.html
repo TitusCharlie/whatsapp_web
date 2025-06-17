@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WhatsApp Scheduler</title>
+</head>
+<body>
+    <h2>Schedule WhatsApp Task</h2>
+    <form action="/schedule" method="POST">
+        <label>Task Type:</label>
+        <select name="task_type">
+            <option value="message">Group Message</option>
+            <option value="status">Status Upload</option>
+        </select><br><br>
+
+        <label>Target Group or Caption:</label>
+        <input type="text" name="target" required><br><br>
+
+        <label>Message/Caption (optional):</label>
+        <textarea name="message" rows="3" cols="40"></textarea><br><br>
+
+        <label>Media Path (for status):</label>
+        <input type="text" name="media_path"><br><br>
+
+        <label>WhatsApp Profiles (comma-separated):</label>
+        <input type="text" name="profiles" required><br><br>
+
+        <label>Scheduled Time (YYYY-MM-DD HH:MM):</label>
+        <input type="text" name="scheduled_time" required><br><br>
+
+        <button type="submit">Schedule Task</button>
+    </form>
+</body>
+</html>
