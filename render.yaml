@@ -1,6 +1,8 @@
 services:
   - type: web
-    name: whatsapp-scheduler
+    name: whatsapp-web
     env: python
-    buildCommand: ""
+    buildCommand: |
+      pip install -r requirements.txt
+      python -m playwright install chromium
     startCommand: python app.py
