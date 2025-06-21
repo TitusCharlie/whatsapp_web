@@ -1,14 +1,12 @@
-import os, platform
-import chromedriver_autoinstaller
+import os, platform, chromedriver_autoinstaller
 from selenium import webdriver
 
 class DriverFactory:
     @staticmethod
     def get_driver(profile):
-        # Install matching chromedriver
         chromedriver_autoinstaller.install()
 
-        # Set user-data-dir based on OS
+        # Platform-specific Chrome user data directory
         if platform.system() == "Linux":
             base = os.path.expanduser("~/.config/google-chrome")
         elif platform.system() == "Windows":
@@ -17,6 +15,7 @@ class DriverFactory:
             base = os.path.expanduser("~/Library/Application Support/Google/Chrome")
 
         options = webdriver.ChromeOptions()
+        options.binary_location = os.getenv("GOOGLE_CHROME_BIN", "/usr/bin/google-chrome")
         options.add_argument("--headless=new")
         options.add_argument("--no-sandbox")
         options.add_argument("--disable-dev-shm-usage")
