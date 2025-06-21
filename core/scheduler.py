@@ -1,7 +1,7 @@
 import threading
 import time
-from core.repository import TaskRepository
-from core.executors import GroupMessageExecutor, StatusUploadExecutor
+from .repository import TaskRepository
+from .executors import GroupMessageExecutor, StatusUploadExecutor
 
 class TaskScheduler:
     EXECUTOR_MAP = {
