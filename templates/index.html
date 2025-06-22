@@ -1,33 +1,100 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>WhatsApp Scheduler</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>WhatsApp Scheduler Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      min-height: 100vh;
+      background-color: #f8f9fa;
+    }
+    .sidebar {
+      height: 100vh;
+      padding-top: 2rem;
+      background-color: #343a40;
+    }
+    .sidebar a {
+      color: #ffffff;
+      text-decoration: none;
+      display: block;
+      padding: 0.75rem 1.25rem;
+    }
+    .sidebar a:hover {
+      background-color: #495057;
+    }
+    .form-section {
+      background: #ffffff;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.1);
+    }
+  </style>
 </head>
 <body>
-    <h2>Schedule WhatsApp Task</h2>
-    <form action="/schedule" method="POST">
-        <label>Task Type:</label>
-        <select name="task_type">
-            <option value="message">Group Message</option>
-            <option value="status">Status Upload</option>
-        </select><br><br>
+  <div class="container-fluid">
+    <div class="row">
 
-        <label>Target Group or Caption:</label>
-        <input type="text" name="target" required><br><br>
+      <!-- Sidebar -->
+      <nav class="col-md-3 col-lg-2 d-md-block sidebar">
+        <h4 class="text-light text-center">WA Scheduler</h4>
+        <a href="/">📅 Schedule Task</a>
+        <a href="#">📝 View Tasks</a>
+        <a href="#">⚙️ Settings</a>
+        <a href="#">📤 Logs</a>
+      </nav>
 
-        <label>Message/Caption (optional):</label>
-        <textarea name="message" rows="3" cols="40"></textarea><br><br>
+      <!-- Main Content -->
+      <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 mt-4">
+        <h2>Schedule WhatsApp Task</h2>
+        <div class="form-section mt-4">
 
-        <label>Media Path (for status):</label>
-        <input type="text" name="media_path"><br><br>
+          <form action="/schedule" method="POST" enctype="multipart/form-data">
+            <div class="mb-3">
+              <label class="form-label">Task Type</label>
+              <select name="task_type" class="form-select" required>
+                <option value="group_message">Group Message</option>
+                <option value="status_upload">Status Upload</option>
+              </select>
+            </div>
 
-        <label>WhatsApp Profiles (comma-separated):</label>
-        <input type="text" name="profiles" required><br><br>
+            <div class="mb-3">
+              <label class="form-label">Target (Group name or Caption)</label>
+              <input type="text" name="target" class="form-control" placeholder="Group name or caption" required>
+            </div>
 
-        <label>Scheduled Time (YYYY-MM-DD HH:MM):</label>
-        <input type="text" name="scheduled_time" required><br><br>
+            <div class="mb-3">
+              <label class="form-label">Message / Caption (optional)</label>
+              <textarea name="message" class="form-control" rows="3" placeholder="Message or caption text..."></textarea>
+            </div>
 
-        <button type="submit">Schedule Task</button>
-    </form>
+            <div class="mb-3">
+              <label class="form-label">Upload Media (for Status)</label>
+              <input type="file" name="media" class="form-control" accept="image/*,video/*">
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">WhatsApp Profiles</label>
+              <input type="text" name="profiles" class="form-control" placeholder="e.g. Profile 1, Profile 2" required>
+              <div class="form-text">Comma-separated profile names (should match Chrome profile folders).</div>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Scheduled Time</label>
+              <input type="text" name="scheduled_time" class="form-control" placeholder="YYYY-MM-DD HH:MM" required>
+              <div class="form-text">Time format: 24hr clock (e.g., 2025-06-21 14:30)</div>
+            </div>
+
+            <button type="submit" class="btn btn-success">📤 Schedule Task</button>
+          </form>
+
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
